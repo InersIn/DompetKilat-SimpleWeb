@@ -39,6 +39,18 @@ func (repository *accountRepositoryImpl) Register(ctx context.Context, account m
 	return account, nil
 }
 
-func (repository *accountRepositoryImpl) FindByUsername(ctx context.Context, username string) (models.Account, error) {
-	return models.Account{}, nil
+func (repository *accountRepositoryImpl) FindByUsername(ctx context.Context, username string) (string, error) {
+	var hashed string
+
+	script := "SELECT password FROM Users WHERE username=?"
+	result, err := repository.DB.QueryContext(ctx, script, username)
+	if err != nil {
+		return "", err
+	}
+
+	for result.Next() {
+		result.Scan(&hashed)
+	}
+
+	return hashed, nil
 }
