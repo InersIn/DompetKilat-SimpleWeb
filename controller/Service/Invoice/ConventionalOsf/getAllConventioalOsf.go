@@ -13,7 +13,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func GetAllInvoice(c echo.Context) error {
+func GetAllInvoiceOsf(c echo.Context) error {
 	var responseData models.ResponseData
 	db := mysql.GetConnection()
 	defer db.Close()

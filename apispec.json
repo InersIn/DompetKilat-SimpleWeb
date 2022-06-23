@@ -286,11 +286,84 @@
         "tags": [
           "Finance"
         ],
-        "description": "Get All Invoice From Current User",
-        "summary": "Get All Invoice From Current User",
+        "description": "Get All Invoice Osf From Current User",
+        "summary": "Get All Invoice Osf From Current User",
         "responses": {
           "200": {
-            "description": "All finance data from current user",
+            "description": "All Invoice Osf data from current user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoiceGetResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/service/createConventionalInvoice": {
+      "post": {
+        "security": [
+          {
+            "bearerAuth": [
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImluZXJzaW4iLCJ1c2VyX2lkIjo3LCJleHAiOjE2NTU5NzA3ODF9.pGUIr6EX_Msy_MlfBRR8ZMEqOZ01fAMY1sYirNs-1MA"
+            ]
+          }
+        ],
+        "tags": [
+          "Finance"
+        ],
+        "description": "Create Conventional Invoice",
+        "summary": "Create Conventional Invoice",
+        "requestBody": {
+          "description": "Create Invoice Post Data",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoiceBodyData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success Create Invoice",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failed Create Invoice",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Finance"
+        ],
+        "description": "Get All Conventional Invoice From Current User",
+        "summary": "Get All Conventional Invoice From Current User",
+        "responses": {
+          "200": {
+            "description": "All Conventional Invoice data from current user",
             "content": {
               "application/json": {
                 "schema": {
@@ -366,13 +439,13 @@
             }
           }
         }
-      },
-      "securitySchemes": {
-        "bearerAuth": {
-          "type": "http",
-          "scheme": "bearer",
-          "bearerFormat": "JWT"
-        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
