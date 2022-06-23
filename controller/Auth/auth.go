@@ -11,13 +11,15 @@ var JWT_KEY = []byte("764b710a-6b62-4199-8f2f-0eccabd65091")
 
 type Claims struct {
 	Username string `json:"username"`
+	Id       int    `json:"user_id"`
 	jwt.StandardClaims
 }
 
-func GenerateToken(username string) (string, error) {
+func GenerateToken(username string, id int) (string, error) {
 	expirationTime := time.Now().Add(1 * time.Hour)
 	claims := &Claims{
 		Username: username,
+		Id:       id,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
 		},
@@ -58,4 +60,17 @@ func ValidateToken(signedToken string) (err error) {
 	}
 
 	return
+}
+
+func ExtractToken(signedToken string) (string, int) {
+	token, _ := jwt.ParseWithClaims(
+		signedToken,
+		&Claims{},
+		func(token *jwt.Token) (interface{}, error) {
+			return []byte(JWT_KEY), nil
+		},
+	)
+
+	claims, _ := token.Claims.(*Claims)
+	return claims.Username, claims.Id
 }

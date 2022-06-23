@@ -4,6 +4,7 @@ import (
 	auth "DompetKilat-SimpleWeb/controller/Auth"
 	"DompetKilat-SimpleWeb/models"
 	"net/http"
+	"strings"
 
 	"github.com/labstack/echo/v4"
 )
@@ -17,6 +18,8 @@ func ValidateToken(next echo.HandlerFunc) echo.HandlerFunc {
 			response.Message = "Token missing"
 			return c.JSON(http.StatusUnauthorized, response)
 		}
+
+		token = strings.Split(token, "Bearer ")[1]
 		err := auth.ValidateToken(token)
 		if err != nil {
 			response.Status = "Request Unauthorized"

@@ -30,18 +30,22 @@ func TestRegisterAccount(t *testing.T) {
 func TestFindByUsername(t *testing.T) {
 	login := AccountRepository(mysql.GetConnection())
 	ctx := context.Background()
+	var account models.Account
+	var err error
 
 	loginData := models.Account{
 		Username: "Dwii",
 		Password: "DwiWardana",
 	}
 
-	hashed, err := login.FindByUsername(ctx, loginData.Username)
+	account, err = login.FindByUsername(ctx, loginData)
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	byteHashed := []byte(hashed)
+	fmt.Println(account)
+
+	byteHashed := []byte(account.Password)
 	bytePass := []byte(loginData.Password)
 
 	if bcrypt.CompareHashAndPassword(byteHashed, bytePass) != nil {

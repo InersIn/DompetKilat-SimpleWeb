@@ -7,5 +7,5 @@ import (
 
 type Repository interface {
 	Register(ctx context.Context, account models.Account) (models.Account, error)
-	FindByUsername(ctx context.Context, username string) (string, error)
+	FindByUsername(ctx context.Context, username models.Account) (models.Account, error)
 }

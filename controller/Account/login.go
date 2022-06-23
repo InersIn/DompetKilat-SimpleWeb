@@ -22,27 +22,29 @@ func LoginAccount(c echo.Context) error {
 	ctx := context.Background()
 	loginRepo := accountRepo.AccountRepository(db)
 
+	var body modelsAccount.Account
 	var login modelsAccount.Account
 	var response models.Response
 
-	err := json.NewDecoder(c.Request().Body).Decode(&login)
+	err := json.NewDecoder(c.Request().Body).Decode(&body)
 
-	if err != nil || login.Password == "" || login.Username == "" {
+	if err != nil || body.Password == "" || body.Username == "" {
 		response.Status = "error"
 		response.Message = "All field is required"
 		return c.JSON(http.StatusBadRequest, response)
 	}
 
-	hashed, err := loginRepo.FindByUsername(ctx, login.Username)
-	byteHashed := []byte(hashed)
+	login, err = loginRepo.FindByUsername(ctx, body)
 
-	if bcrypt.CompareHashAndPassword(byteHashed, []byte(login.Password)) != nil {
+	byteHashed := []byte(login.Password)
+
+	if bcrypt.CompareHashAndPassword(byteHashed, []byte(body.Password)) != nil {
 		response.Status = "Login Failed"
 		response.Message = "Username or password incorrect"
 		return c.JSON(http.StatusUnauthorized, response)
 	}
 
-	token, err := auth.GenerateToken(login.Username)
+	token, err := auth.GenerateToken(login.Username, login.User_id)
 
 	if err != nil {
 		response.Status = "error"

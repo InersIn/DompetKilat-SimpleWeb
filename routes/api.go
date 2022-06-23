@@ -23,5 +23,5 @@ func Api(e *echo.Echo) {
 
 	api.Use(customeMiddleware.ValidateToken)
 	// Test
-	api.Add("GET", "/private", private)
+	Service(api)
 }

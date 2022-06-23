@@ -123,6 +123,54 @@
           }
         }
       }
+    },
+    "/service/createFinances": {
+      "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Finance"
+        ],
+        "description": "Create Finances",
+        "summary": "Create Finances",
+        "requestBody": {
+          "description": "Create Finance Post Data",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "count": {
+                    "type": "number"
+                  },
+                  "sub": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success Create Finances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -137,6 +185,13 @@
             "type": "string"
           }
         }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
