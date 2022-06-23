@@ -24,6 +24,10 @@ func RegisterAccount(c echo.Context) error {
 
 	err := json.NewDecoder(c.Request().Body).Decode(&register)
 
+	if err != nil {
+		panic(err)
+	}
+
 	if register.Email == "" || register.Password == "" || register.Username == "" {
 		response.Status = "error"
 		response.Message = "All field is required"

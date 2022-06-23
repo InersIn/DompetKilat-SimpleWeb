@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  DompetKilatDB:
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    container_name: DompetKilatDB
+    volumes:
+      - ./database/db.sql:/docker-entrypoint-initdb.d/db.sql
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: dompetkilat
+      MYSQL_DATABASE: DompetKilatDB
+      MYSQL_USER: dokil
+      MYSQL_PASSWORD: dompetkilat
+    ports:
+      - 3306:3306
+    networks:
+      - dompetkilatNetwork
+  DompetKilatServer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: DompetKilatServer
+    image: golang
+    environment:
+      MYSQL_HOST: DompetKilatDB
+      MYSQL_ROOT_PASSWORD: dompetkilat
+      MYSQL_DATABASE: DompetKilatDB
+      MYSQL_USER: dokil
+      MYSQL_PASSWORD: dompetkilat
+      MYSQL_DB_PORT: 3306
+    ports:
+      - 8000:8000
+    depends_on:
+      - DompetKilatDB
+    networks:
+      - dompetkilatNetwork
+
+networks:
+  dompetkilatNetwork:
+    name: DompetKilatNetwork
