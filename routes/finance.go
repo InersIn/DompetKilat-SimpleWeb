@@ -2,8 +2,10 @@ package routes
 
 import (
 	finance "DompetKilat-SimpleWeb/controller/Service/Finance"
-	invoiceCO "DompetKilat-SimpleWeb/controller/Service/Invoice/ConventionalOsf"
 	invoiceCI "DompetKilat-SimpleWeb/controller/Service/Invoice/ConventionalInv"
+	invoiceCO "DompetKilat-SimpleWeb/controller/Service/Invoice/ConventionalOsf"
+	invoicePI "DompetKilat-SimpleWeb/controller/Service/Invoice/ProductiveInv"
+	reksadana "DompetKilat-SimpleWeb/controller/Service/Reksadana"
 
 	"github.com/labstack/echo/v4"
 )
@@ -18,4 +20,10 @@ func Service(e *echo.Group) {
 
 	service.Add("POST", "/createConventionalInvoice", invoiceCI.CreateConventionalInvoice)
 	service.Add("GET", "/createConventionalInvoice", invoiceCI.GetAllInvoiceInv)
+
+	service.Add("POST", "/createProductiveInvoice", invoicePI.CreateProductiveInv)
+	service.Add("GET", "/createProductiveInvoice", invoicePI.GetAllProductiveInv)
+
+	service.Add("POST", "/createReksadana", reksadana.CreateReksadana)
+	service.Add("GET", "/createReksadana", reksadana.GetAllReksadana)
 }

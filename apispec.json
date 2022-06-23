@@ -239,7 +239,7 @@
           }
         ],
         "tags": [
-          "Finance"
+          "Invoice"
         ],
         "description": "Create Conventional Invoice Osf",
         "summary": "Create Conventional Invoice Osf",
@@ -284,7 +284,7 @@
           }
         ],
         "tags": [
-          "Finance"
+          "Invoice"
         ],
         "description": "Get All Invoice Osf From Current User",
         "summary": "Get All Invoice Osf From Current User",
@@ -294,7 +294,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InvoiceGetResponse"
+                  "$ref": "#/components/schemas/GetResponse"
                 }
               }
             }
@@ -312,7 +312,7 @@
           }
         ],
         "tags": [
-          "Finance"
+          "Invoice"
         ],
         "description": "Create Conventional Invoice",
         "summary": "Create Conventional Invoice",
@@ -357,7 +357,7 @@
           }
         ],
         "tags": [
-          "Finance"
+          "Invoice"
         ],
         "description": "Get All Conventional Invoice From Current User",
         "summary": "Get All Conventional Invoice From Current User",
@@ -367,7 +367,160 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InvoiceGetResponse"
+                  "$ref": "#/components/schemas/GetResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/service/createProductiveInvoice": {
+      "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Invoice"
+        ],
+        "description": "Create Productive Invoice",
+        "summary": "Create Productive Invoice",
+        "requestBody": {
+          "description": "Create Productive Invoice Post Data",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoiceBodyData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success Create Productive Invoice",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failed Create Productive Invoice",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Invoice"
+        ],
+        "description": "Get All Productive Invoice From Current User",
+        "summary": "Get All Productive Invoice From Current User",
+        "responses": {
+          "200": {
+            "description": "All Productive Invoice data from current user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/service/createReksadana": {
+      "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Reksadana"
+        ],
+        "description": "Create Reksadana",
+        "summary": "Create Reksadana",
+        "requestBody": {
+          "description": "Create Reksadana Post Data",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "number"
+                  },
+                  "return": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success Create Reksadana",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failed Create Reksadana",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Reksadana"
+        ],
+        "description": "Get All Reksadana From Current User",
+        "summary": "Get All ReksadanaFrom Current User",
+        "responses": {
+          "200": {
+            "description": "All Reksadana data from current user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetResponse"
                 }
               }
             }
@@ -409,7 +562,7 @@
           }
         }
       },
-      "InvoiceGetResponse": {
+      "GetResponse": {
         "type": "object",
         "properties": {
           "status": {

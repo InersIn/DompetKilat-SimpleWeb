@@ -33,7 +33,5 @@ func TestGetAllFinances(t *testing.T) {
 		fmt.Println(err)
 	}
 
-	for _, value := range finances {
-		fmt.Println(value.Name, value.Count, value.Sub, value.User_id)
-	}
+	fmt.Println(finances)
 }
