@@ -170,6 +170,55 @@
             }
           }
         }
+      },
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Finance"
+        ],
+        "description": "Get All Finance From Current User",
+        "summary": "Get All Finance From Current User",
+        "responses": {
+          "200": {
+            "description": "All finance data from current user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "finance_id": {
+                          "type": "number"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "count": {
+                          "type": "number"
+                        },
+                        "sub": {
+                          "type": "string"
+                        },
+                        "user_id": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   },

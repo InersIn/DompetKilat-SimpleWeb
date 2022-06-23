@@ -22,3 +22,18 @@ func TestCreateFinances(t *testing.T) {
 		fmt.Println(err)
 	}
 }
+
+func TestGetAllFinances(t *testing.T) {
+	financeRepo := FinanceRepository(mysql.GetConnection())
+	ctx := context.Background()
+
+	var finances []modelsFinance.Finance
+	finances, err := financeRepo.GetAllFinance(ctx, 7)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	for _, value := range finances {
+		fmt.Println(value.Name, value.Count, value.Sub, value.User_id)
+	}
+}

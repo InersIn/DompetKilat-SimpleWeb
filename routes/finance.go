@@ -9,4 +9,5 @@ import (
 func Service(e *echo.Group) {
 	service := e.Group("/service")
 	service.Add("POST", "/createFinances", finance.CreateFinance)
+	service.Add("GET", "/createFinances", finance.GetAllFinance)
 }
