@@ -6,6 +6,7 @@ import (
 	invoiceCO "DompetKilat-SimpleWeb/controller/Service/Invoice/ConventionalOsf"
 	invoicePI "DompetKilat-SimpleWeb/controller/Service/Invoice/ProductiveInv"
 	reksadana "DompetKilat-SimpleWeb/controller/Service/Reksadana"
+	sbn "DompetKilat-SimpleWeb/controller/Service/Sbn"
 
 	"github.com/labstack/echo/v4"
 )
@@ -26,4 +27,7 @@ func Service(e *echo.Group) {
 
 	service.Add("POST", "/createReksadana", reksadana.CreateReksadana)
 	service.Add("GET", "/createReksadana", reksadana.GetAllReksadana)
+
+	service.Add("POST", "/createSbn", sbn.CreateSbn)
+	service.Add("GET", "/createSbn", sbn.GetALlSbn)
 }

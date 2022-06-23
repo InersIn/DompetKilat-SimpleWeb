@@ -12,9 +12,10 @@ type Invoce struct {
 
 // Models For SBN
 type Sbn struct {
-	Name   string `json:"name"`
-	Amount int64  `json:"amount"`
-	Tenor  int    `json:"tenor"`
-	Rate   int    `json:"rate"`
-	Type   string `json:"type"`
+	Name    string `json:"name"`
+	Amount  int64  `json:"amount"`
+	Tenor   int    `json:"tenor"`
+	Rate    int    `json:"rate"`
+	Type    string `json:"type"`
+	User_id string `json:"user_id"`
 }

@@ -527,6 +527,111 @@
           }
         }
       }
+    },
+    "/service/createSbn": {
+      "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "SBN"
+        ],
+        "description": "Create SBN",
+        "summary": "Create SBN",
+        "requestBody": {
+          "description": "Create SBN Post Data",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "number"
+                  },
+                  "tenor": {
+                    "type": "integer"
+                  },
+                  "rate": {
+                    "type": "integer"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success Create SBN",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failed Create SBN",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "SBN"
+        ],
+        "description": "Get All SBN From Current User",
+        "summary": "Get All SBN From Current User",
+        "responses": {
+          "200": {
+            "description": "All SBN data from current user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "amount": {
+                      "type": "number"
+                    },
+                    "tenor": {
+                      "type": "number"
+                    },
+                    "rate": {
+                      "type": "number"
+                    },
+                    "type": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
