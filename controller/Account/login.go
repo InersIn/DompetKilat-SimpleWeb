@@ -3,6 +3,7 @@ package account
 import (
 	auth "DompetKilat-SimpleWeb/controller/Auth"
 	"DompetKilat-SimpleWeb/database/mysql"
+	models "DompetKilat-SimpleWeb/models"
 	modelsAccount "DompetKilat-SimpleWeb/models/Account"
 	modelsAuth "DompetKilat-SimpleWeb/models/Auth"
 	accountRepo "DompetKilat-SimpleWeb/repository/Account"
@@ -22,7 +23,7 @@ func LoginAccount(c echo.Context) error {
 	loginRepo := accountRepo.AccountRepository(db)
 
 	var login modelsAccount.Account
-	var response modelsAccount.RegisterResponse
+	var response models.Response
 
 	err := json.NewDecoder(c.Request().Body).Decode(&login)
 
@@ -34,7 +35,7 @@ func LoginAccount(c echo.Context) error {
 
 	hashed, err := loginRepo.FindByUsername(ctx, login.Username)
 	byteHashed := []byte(hashed)
-	
+
 	if bcrypt.CompareHashAndPassword(byteHashed, []byte(login.Password)) != nil {
 		response.Status = "Login Failed"
 		response.Message = "Username or password incorrect"

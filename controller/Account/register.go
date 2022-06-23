@@ -2,7 +2,8 @@ package account
 
 import (
 	"DompetKilat-SimpleWeb/database/mysql"
-	models "DompetKilat-SimpleWeb/models/Account"
+	models "DompetKilat-SimpleWeb/models"
+	modelsAccount "DompetKilat-SimpleWeb/models/Account"
 	accountRepo "DompetKilat-SimpleWeb/repository/Account"
 	"context"
 	"encoding/json"
@@ -18,8 +19,8 @@ func RegisterAccount(c echo.Context) error {
 	ctx := context.Background()
 	registerRepo := accountRepo.AccountRepository(db)
 
-	var register models.Account
-	var response models.RegisterResponse
+	var register modelsAccount.Account
+	var response models.Response
 
 	err := json.NewDecoder(c.Request().Body).Decode(&register)
 
