@@ -9,6 +9,7 @@ import (
 	accountRepo "DompetKilat-SimpleWeb/repository/Account"
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -35,10 +36,14 @@ func LoginAccount(c echo.Context) error {
 	}
 
 	login, err = loginRepo.FindByUsername(ctx, body)
+	if err != nil {
+		panic(err)
+	}
 
 	byteHashed := []byte(login.Password)
 
 	if bcrypt.CompareHashAndPassword(byteHashed, []byte(body.Password)) != nil {
+		fmt.Println(login.Password, []byte(body.Password), login)
 		response.Status = "Login Failed"
 		response.Message = "Username or password incorrect"
 		return c.JSON(http.StatusUnauthorized, response)
