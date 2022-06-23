@@ -168,6 +168,16 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Failed Create Finances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
           }
         }
       },
@@ -220,6 +230,77 @@
           }
         }
       }
+    },
+    "/service/createConventionalOsf": {
+      "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Finance"
+        ],
+        "description": "Create Conventional Invoice Osf",
+        "summary": "Create Conventional Invoice Osf",
+        "requestBody": {
+          "description": "Create Invoice Post Data",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoiceBodyData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success Create Invoice",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failed Create Invoice",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Finance"
+        ],
+        "description": "Get All Invoice From Current User",
+        "summary": "Get All Invoice From Current User",
+        "responses": {
+          "200": {
+            "description": "All finance data from current user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoiceGetResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -234,13 +315,64 @@
             "type": "string"
           }
         }
-      }
-    },
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
+      },
+      "InvoiceBodyData": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "tenor": {
+            "type": "number"
+          },
+          "grade": {
+            "type": "string"
+          },
+          "rate": {
+            "type": "number"
+          }
+        }
+      },
+      "InvoiceGetResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "amount": {
+                "type": "number"
+              },
+              "tenor": {
+                "type": "number"
+              },
+              "grade": {
+                "type": "string"
+              },
+              "rate": {
+                "type": "number"
+              },
+              "type": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
       }
     }
   }

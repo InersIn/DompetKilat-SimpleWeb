@@ -1,15 +1,14 @@
 package finance
 
 import (
-	auth "DompetKilat-SimpleWeb/controller/Auth"
 	"DompetKilat-SimpleWeb/database/mysql"
+	"DompetKilat-SimpleWeb/helper"
 	"DompetKilat-SimpleWeb/models"
 	modelsFinance "DompetKilat-SimpleWeb/models/Finance"
-	financeRepo "DompetKilat-SimpleWeb/repository/Finance"
+	financeRepo "DompetKilat-SimpleWeb/repository/Service/Finance"
 	"context"
 	"fmt"
 	"net/http"
-	"strings"
 
 	"github.com/labstack/echo/v4"
 )
@@ -23,10 +22,7 @@ func GetAllFinance(c echo.Context) error {
 	financeRepo := financeRepo.FinanceRepository(db)
 	var response models.Response
 
-	token := c.Request().Header.Get("Authorization")
-	token = strings.Split(token, "Bearer ")[1]
-
-	_, id := auth.ExtractToken(token)
+	_, id := helper.GetToken(c)
 
 	var finances []modelsFinance.Finance
 	finances, err := financeRepo.GetAllFinance(ctx, id)

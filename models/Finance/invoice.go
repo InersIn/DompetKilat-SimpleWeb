@@ -5,10 +5,10 @@ type Invoce struct {
 	Name   string `json:"name"`
 	Amount int64  `json:"amount"`
 	Tenor  int    `json:"tenor"`
+	Grade  string `json:"grade"`
 	Rate   int    `json:"rate"`
 	Type   string `json:"type"`
 }
-
 
 // Models For SBN
 type Sbn struct {
